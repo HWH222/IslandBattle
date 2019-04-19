@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "IBIsland.generated.h"
 
+class UStaticMeshComponent;
+
 UCLASS()
 class ISLANDBATTLE_API AIBIsland : public AActor
 {
@@ -20,6 +22,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Resource")
 	TSubclassOf<AActor>  TreeResource;
+
+	UPROPERTY(EditDefaultsOnly, Category = "MeshComp")
+	UStaticMeshComponent* IslandBase;
 
 protected:
 	// Called when the game starts or when spawned
