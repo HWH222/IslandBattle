@@ -23,7 +23,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Resource")
 	TSubclassOf<AActor>  TreeResource;
 
-	UPROPERTY(EditDefaultsOnly, Category = "MeshComp")
+	UPROPERTY(EditAnywhere, Category = "MeshComp")
 	UStaticMeshComponent* IslandBase;
 
 protected:

@@ -12,7 +12,9 @@ AIBIsland::AIBIsland()
 	PrimaryActorTick.bCanEverTick = true;
 
 	IslandBase = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("IslandBase"));
+	RootComponent = IslandBase;
 
+	
 }
 
 // Called when the game starts or when spawned
