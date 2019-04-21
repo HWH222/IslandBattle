@@ -23,8 +23,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Resource")
 	TSubclassOf<AActor>  TreeResource;
 
-	UPROPERTY(EditAnywhere, Category = "MeshComp")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MeshComp")
 	UStaticMeshComponent* IslandBase;
+
+	
 
 protected:
 	// Called when the game starts or when spawned
