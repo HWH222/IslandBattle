@@ -8,6 +8,7 @@
 
 class USphereComponent;
 class UStaticMeshComponent;
+class UPrimitiveComponent;
 
 UCLASS()
 class ISLANDBATTLE_API AIBBuildingBase : public AActor
@@ -20,10 +21,10 @@ public:
 
 	
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category = "Value")
-	float BuildingAreaRadius = 200.0f;
+	float BuildingAreaRadius = 100.0f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Value")
-	float DamageAreaRadius = 100.0f;
+	float DamageAreaRadius = 35.0f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Value")
 	TArray<AActor*> Resource;
@@ -50,5 +51,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	void OnActorOverlapBuildingArea(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
 };
