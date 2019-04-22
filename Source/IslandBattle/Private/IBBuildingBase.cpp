@@ -55,6 +55,7 @@ void AIBBuildingBase::OnActorOverlapBuildingArea(UPrimitiveComponent* Overlapped
 {
 	if (OtherActor)
 	{
+
 		UE_LOG(LogTemp, Warning,TEXT("Something in it"));
 	}
 }
