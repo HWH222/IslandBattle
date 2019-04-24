@@ -6,6 +6,10 @@
 #include "GameFramework/Pawn.h"
 #include "IBCameraPawn.generated.h"
 
+class UCameraComponent;
+class USceneComponent;
+class USpringArmComponent;
+
 UCLASS()
 class ISLANDBATTLE_API AIBCameraPawn : public APawn
 {
@@ -25,6 +29,18 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Paramter")
 	float CameraRotateRate = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Paramter")
+	float CameraArmLength = 100.0f;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Comps")
+	USceneComponent* RootComp;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Comps")
+	USpringArmComponent* CameraArm;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite,Category = "Comps")
+	UCameraComponent* PlayerCamera;
 
 	UFUNCTION()
 	void CameraMovement();
