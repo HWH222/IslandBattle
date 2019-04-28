@@ -6,36 +6,40 @@
 
 TArray<FVector> AIBShipAIController::SearchPath(const FVector & location)
 {
+	TArray<FVector> Result;
 	FPathFindingQuery Query;
 	FAIMoveRequest MoveRequest(location);
 	MoveRequest.SetUsePathfinding(true);
-	//const bool bValidQuery = 
-	FNavPathSharedPtr Path;
-	FindPathForMoveRequest(MoveRequest,Query,Path);
-	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
-	FPathFindingResult PathResult;
-	TArray<FVector> Result;
-	if (NavSys)
+	const bool bValidQuery = BuildPathfindingQuery(MoveRequest, Query);
+	if (bValidQuery)
 	{
-		PathResult = NavSys->FindPathSync(Query);
-		if (PathResult.Result != ENavigationQueryResult::Error)
+		UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+		FPathFindingResult PathResult;
+
+		if (NavSys)
 		{
-			if (PathResult.IsSuccessful() && PathResult.Path.IsValid())
+			PathResult = NavSys->FindPathSync(Query);
+			if (PathResult.Result != ENavigationQueryResult::Error)
 			{
-				for (FNavPathPoint point : PathResult.Path->GetPathPoints())
+				if (PathResult.IsSuccessful() && PathResult.Path.IsValid())
 				{
-					Result.Add(point.Location);
+					for (FNavPathPoint point : PathResult.Path->GetPathPoints())
+					{
+						Result.Add(point.Location);
+					}
 				}
+			}
+			else
+			{
+				UE_LOG(LogTemp, Log, TEXT("Pathfinding failed."));
 			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Log, TEXT("Pathfinding failed."));
+			UE_LOG(LogTemp, Log, TEXT("Can't find navigation system."));
 		}
+
 	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("Can't find navigation system."));
-	}
+	else UE_LOG(LogTemp, Log, TEXT("INvalid Query."));
 	return Result;
 }
