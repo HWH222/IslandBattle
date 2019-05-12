@@ -4,7 +4,7 @@
 #include "IBShipBase.h"
 #include "Components/StaticMeshComponent.h"
 #include "IBShipAIController.h"
-#include "Engine.h"
+#include "INShipComponent.h"
 
 // Sets default values
 AIBShipBase::AIBShipBase()
@@ -14,6 +14,7 @@ AIBShipBase::AIBShipBase()
 
 	ShipComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ship"));
 
+	ShipMoveMentComp = CreateDefaultSubobject<UINShipComponent>(TEXT("ShipMoveMentComp"));
 }
 
 // Called when the game starts or when spawned
@@ -27,7 +28,7 @@ void AIBShipBase::BeginPlay()
 void AIBShipBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	ShipMoveMentComp->Moving(DeltaTime);
 }
 
 // Called to bind functionality to input
@@ -45,13 +46,15 @@ void AIBShipBase::CommandMoveTo(const FVector& location)
 		TArray<FVector> PathPoints = ShipAIController->SearchPath(location);
 		if (PathPoints.Num() != 0)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Find Path Points"));
+			ShipMoveMentComp->StartMoving(PathPoints);
 			for (int32 num = 0; num < PathPoints.Num(); num++)
 			{
 				UE_LOG(LogClass, Log, TEXT("Names: %s"), *PathPoints[num].ToString());
 			}
+
 		}
-		else GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("No Path Points"));
+		else UE_LOG(LogClass, Log, TEXT("No Path Points"));;
 	}
 }
+
 

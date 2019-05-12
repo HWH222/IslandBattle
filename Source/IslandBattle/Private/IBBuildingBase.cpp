@@ -60,3 +60,7 @@ void AIBBuildingBase::OnActorOverlapBuildingArea(UPrimitiveComponent* Overlapped
 	}
 }
 
+void AIBBuildingBase::SendNextPathPoint(const FVector & location)
+{
+}
+

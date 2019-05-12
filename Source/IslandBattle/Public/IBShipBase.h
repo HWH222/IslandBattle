@@ -8,6 +8,7 @@
 
 
 class UStaticMeshComponent;
+class UINShipComponent;
 UCLASS()
 class ISLANDBATTLE_API AIBShipBase : public APawn
 {
@@ -23,6 +24,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = "Comps")
 	UStaticMeshComponent* ShipComp;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Comps")
+	UINShipComponent* ShipMoveMentComp;
 
 public:	
 

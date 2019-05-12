@@ -15,5 +15,7 @@ class ISLANDBATTLE_API AIBShipAIController : public AAIController
 	GENERATED_BODY()
 	
 public:
+
 	TArray<FVector> SearchPath(const FVector& location);
+
 };
